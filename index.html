@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QCM</title>
+  <title>QCM — Choisir un questionnaire</title>
   <style>
     * {
       box-sizing: border-box;
@@ -30,349 +30,346 @@
       color: #16213e;
     }
 
-    /* ---------- Question card ---------- */
-    .question-card {
+    .qcm-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .qcm-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       background: #fff;
       border-radius: 12px;
-      padding: 1.5rem 2rem;
-      margin-bottom: 1.5rem;
+      padding: 2rem 1.5rem;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      transition: border-left 0.3s;
-      border-left: 4px solid transparent;
+      text-decoration: none;
+      color: #1a1a2e;
+      transition: transform 0.15s, box-shadow 0.15s;
+      cursor: pointer;
     }
 
-    .question-card.correct {
-      border-left-color: #27ae60;
+    .qcm-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
     }
 
-    .question-card.incorrect {
-      border-left-color: #e74c3c;
-    }
-
-    .question-number {
-      font-weight: 700;
+    .qcm-card .qcm-num {
+      font-size: 2.5rem;
+      font-weight: 800;
       color: #0f3460;
       margin-bottom: 0.5rem;
     }
 
-    .question-text {
-      font-size: 1.05rem;
-      margin-bottom: 1rem;
-      line-height: 1.5;
-    }
-
-    /* ---------- Choices ---------- */
-    .choices {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .choice-label {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.6rem 1rem;
-      border: 2px solid #dfe6e9;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.2s, border-color 0.2s;
-      user-select: none;
-    }
-
-    .choice-label:hover {
-      background: #f1f2f6;
-    }
-
-    .choice-label input[type="radio"] {
-      accent-color: #0f3460;
-      width: 18px;
-      height: 18px;
-      flex-shrink: 0;
-    }
-
-    .choice-label.selected {
-      background: #dfe6ed;
-      border-color: #0f3460;
-    }
-
-    /* Image / SVG choices */
-    .choice-label.has-image {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.5rem;
-    }
-
-    .choice-label.has-image .choice-image {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-    }
-
-    .choice-label.has-image .choice-image svg {
-      max-width: 200px;
-    }
-
-    /* Inline tables in question text */
-    .qcm-table {
-      border-collapse: collapse;
-      margin: 0.5rem 0;
-    }
-
-    .qcm-table th,
-    .qcm-table td {
-      border: 1px solid #555;
-      padding: 0.4rem 1rem;
-      text-align: center;
-    }
-
-    .qcm-table th {
-      background: #eee;
-      font-weight: 600;
-    }
-
-    /* After correction */
-    .choice-label.correct-answer {
-      background: #d4edda;
-      border-color: #27ae60;
-    }
-
-    .choice-label.wrong-answer {
-      background: #f8d7da;
-      border-color: #e74c3c;
-    }
-
-    /* Explanation */
-    .explanation {
-      display: none;
-      margin-top: 0.75rem;
-      padding: 0.75rem 1rem;
-      background: #fef9e7;
-      border-left: 3px solid #f1c40f;
-      border-radius: 6px;
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
-
-    .explanation.visible {
-      display: block;
-    }
-
-    /* ---------- Buttons ---------- */
-    .btn-row {
-      text-align: center;
-      margin-top: 1.5rem;
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    button {
-      padding: 0.75rem 2rem;
+    .qcm-card .qcm-label {
       font-size: 1rem;
       font-weight: 600;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-    }
-
-    button:active {
-      transform: scale(0.97);
-    }
-
-    #submitBtn {
-      background: #0f3460;
-      color: #fff;
-    }
-
-    #submitBtn:hover {
-      background: #16213e;
-    }
-
-    #submitBtn:disabled {
-      background: #95a5a6;
-      cursor: not-allowed;
-    }
-
-    #resetBtn {
-      background: #e74c3c;
-      color: #fff;
-      display: none;
-    }
-
-    #resetBtn:hover {
-      background: #c0392b;
-    }
-
-    /* ---------- Score ---------- */
-    .score-banner {
-      display: none;
+      color: #16213e;
       text-align: center;
-      padding: 1.25rem;
-      border-radius: 12px;
-      margin-bottom: 1.5rem;
-      font-size: 1.15rem;
+    }
+
+    .qcm-card .qcm-info {
+      font-size: 0.9rem;
+      color: #7f8c8d;
+      margin-top: 0.25rem;
+    }
+
+    .qcm-card .qcm-score {
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 6px;
       font-weight: 600;
     }
 
-    .score-banner.visible {
+    .qcm-score.perfect { background: #d4edda; color: #155724; }
+    .qcm-score.good    { background: #fff3cd; color: #856404; }
+    .qcm-score.bad     { background: #f8d7da; color: #721c24; }
+
+    /* ---------- Results history ---------- */
+    .history-section {
+      margin-top: 2.5rem;
+      display: none;
+    }
+
+    .history-section.visible {
       display: block;
     }
 
-    .score-banner.perfect {
-      background: #d4edda;
-      color: #155724;
+    .history-section h2 {
+      font-size: 1.3rem;
+      color: #16213e;
+      margin-bottom: 1rem;
     }
 
-    .score-banner.good {
-      background: #fff3cd;
-      color: #856404;
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
-    .score-banner.bad {
-      background: #f8d7da;
-      color: #721c24;
+    .history-table th,
+    .history-table td {
+      padding: 0.7rem 1rem;
+      text-align: center;
+    }
+
+    .history-table th {
+      background: #16213e;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .history-table td {
+      border-bottom: 1px solid #eee;
+      font-size: 0.95rem;
+    }
+
+    .history-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .history-table .score-pill {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    .history-table .score-pill.perfect { background: #d4edda; color: #155724; }
+    .history-table .score-pill.good    { background: #fff3cd; color: #856404; }
+    .history-table .score-pill.bad     { background: #f8d7da; color: #721c24; }
+
+    #clearHistoryBtn {
+      margin-top: 0.75rem;
+      background: none;
+      border: 1px solid #e74c3c;
+      color: #e74c3c;
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #clearHistoryBtn:hover {
+      background: #e74c3c;
+      color: #fff;
+    }
+
+    .cat-title {
+      grid-column: 1 / -1;
+      font-size: 1.2rem;
+      color: #0f3460;
+      margin-top: 1.5rem;
+      margin-bottom: 0;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid #0f3460;
+    }
+
+    .cat-title:first-child {
+      margin-top: 0;
     }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <h1>📝 QCM</h1>
+  <h1>📝 Choisir un QCM</h1>
 
-  <div id="scoreBanner" class="score-banner" role="status" aria-live="polite" aria-atomic="true"></div>
-  <div id="questionsContainer"></div>
+  <div class="qcm-grid">
+    <h2 class="cat-title">1 – Calcul numérique et algébrique</h2>
+    <a class="qcm-card" href="qcm.html?qcm=1-1">
+      <span class="qcm-num">1.1</span>
+      <span class="qcm-label">Comparer deux nombres</span>
+      <span class="qcm-info">11 questions</span>
+    </a>
+    <a class="qcm-card" href="qcm.html?qcm=1-2">
+      <span class="qcm-num">1.2</span>
+      <span class="qcm-label">Opérations entre fractions</span>
+      <span class="qcm-info">2 questions</span>
+    </a>
+    <a class="qcm-card" href="qcm.html?qcm=1-3">
+      <span class="qcm-num">1.3</span>
+      <span class="qcm-label">Opérations sur les puissances</span>
+      <span class="qcm-info">2 questions</span>
+    </a>
+    <a class="qcm-card" href="qcm.html?qcm=1-5">
+      <span class="qcm-num">1.5</span>
+      <span class="qcm-label">Estimer un ordre de grandeur</span>
+      <span class="qcm-info">1 question</span>
+    </a>
+    <a class="qcm-card" href="qcm.html?qcm=1-7">
+      <span class="qcm-num">1.7</span>
+      <span class="qcm-label">Conversions d'unités</span>
+      <span class="qcm-info">1 question</span>
+    </a>
+    <a class="qcm-card" href="qcm.html?qcm=1-8">
+      <span class="qcm-num">1.8</span>
+      <span class="qcm-label">Calcul littéral élémentaire</span>
+      <span class="qcm-info">1 question</span>
+    </a>
+    <a class="qcm-card" href="qcm.html?qcm=1-10">
+      <span class="qcm-num">1.10</span>
+      <span class="qcm-label">Équations du premier degré</span>
+      <span class="qcm-info">2 questions</span>
+    </a>
+    <a class="qcm-card" href="qcm.html?qcm=1-11">
+      <span class="qcm-num">1.11</span>
+      <span class="qcm-label">Isoler une variable</span>
+      <span class="qcm-info">2 questions</span>
+    </a>
+    <a class="qcm-card" href="qcm.html?qcm=1-14">
+      <span class="qcm-num">1.14</span>
+      <span class="qcm-label">Signe d'une expression</span>
+      <span class="qcm-info">1 question</span>
+    </a>
 
-  <div class="btn-row">
-    <button id="submitBtn">Valider</button>
-    <button id="resetBtn">Recommencer</button>
+    <h2 class="cat-title">2 – Proportions et pourcentages</h2>
+    <a class="qcm-card" href="qcm.html?qcm=2-1">
+      <span class="qcm-num">2.1</span>
+      <span class="qcm-label">Exprimer une proportion</span>
+      <span class="qcm-info">1 question</span>
+    </a>
+    <a class="qcm-card" href="qcm.html?qcm=2-2">
+      <span class="qcm-num">2.2</span>
+      <span class="qcm-label">Calculer une partie ou un tout</span>
+      <span class="qcm-info">2 questions</span>
+    </a>
+
+    <h2 class="cat-title">3 – Évolutions et variations</h2>
+    <a class="qcm-card" href="qcm.html?qcm=3-1">
+      <span class="qcm-num">3.1</span>
+      <span class="qcm-label">Formulation multiplicative</span>
+      <span class="qcm-info">1 question</span>
+    </a>
+    <a class="qcm-card" href="qcm.html?qcm=3-2">
+      <span class="qcm-num">3.2</span>
+      <span class="qcm-label">Appliquer un taux d'évolution</span>
+      <span class="qcm-info">2 questions</span>
+    </a>
+    <a class="qcm-card" href="qcm.html?qcm=3-3">
+      <span class="qcm-num">3.3</span>
+      <span class="qcm-label">Calculer un taux d'évolution</span>
+      <span class="qcm-info">1 question</span>
+    </a>
+    <a class="qcm-card" href="qcm.html?qcm=3-4">
+      <span class="qcm-num">3.4</span>
+      <span class="qcm-label">Évolutions successives</span>
+      <span class="qcm-info">2 questions</span>
+    </a>
+    <a class="qcm-card" href="qcm.html?qcm=3-5">
+      <span class="qcm-num">3.5</span>
+      <span class="qcm-label">Taux d'évolution réciproque</span>
+      <span class="qcm-info">1 question</span>
+    </a>
+
+    <h2 class="cat-title">4 – Fonctions et représentations</h2>
+    <a class="qcm-card" href="qcm.html?qcm=4-6">
+      <span class="qcm-num">4.6</span>
+      <span class="qcm-label">Droite et équation réduite</span>
+      <span class="qcm-info">1 question</span>
+    </a>
+
+    <h2 class="cat-title">5 – Statistiques</h2>
+    <a class="qcm-card" href="qcm.html?qcm=5-1">
+      <span class="qcm-num">5.1</span>
+      <span class="qcm-label">Lire des graphiques usuels</span>
+      <span class="qcm-info">1 question</span>
+    </a>
+  </div>
+
+  <div class="history-section" id="historySection">
+    <h2>📊 Historique des résultats</h2>
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>QCM</th>
+          <th>Score</th>
+          <th>Résultat</th>
+        </tr>
+      </thead>
+      <tbody id="historyBody"></tbody>
+    </table>
+    <button id="clearHistoryBtn">Effacer l'historique</button>
   </div>
 </div>
 
-<script src="questions.js"></script>
 <script>
-  (function () {
-    const container = document.getElementById("questionsContainer");
-    const submitBtn = document.getElementById("submitBtn");
-    const resetBtn = document.getElementById("resetBtn");
-    const scoreBanner = document.getElementById("scoreBanner");
+  function loadResults() {
+    try {
+      const history = JSON.parse(localStorage.getItem("qcm_results") || "[]");
 
-    /** Render all questions */
-    function render() {
-      container.innerHTML = "";
-      scoreBanner.className = "score-banner";
-      scoreBanner.textContent = "";
-      submitBtn.style.display = "";
-      submitBtn.disabled = false;
-      resetBtn.style.display = "none";
-
-      questions.forEach((q, idx) => {
-        const card = document.createElement("div");
-        card.className = "question-card";
-        card.dataset.id = q.id;
-
-        card.innerHTML = `
-          <p class="question-number">Question ${idx + 1}</p>
-          <div class="question-text">${q.text}</div>
-          <div class="choices">
-            ${q.choices
-              .map(
-                (c) => `
-              <label class="choice-label${c.image ? ' has-image' : ''}" data-label="${c.label}">
-                <input type="radio" name="q${q.id}" value="${c.label}">
-                <span><strong>${c.label}.</strong> ${c.text}</span>
-                ${c.image ? '<div class="choice-image">' + c.image + '</div>' : ''}
-              </label>`
-              )
-              .join("")}
-          </div>
-          <div class="explanation">${q.explanation || ""}</div>
-        `;
-
-        // Highlight selected choice
-        card.querySelectorAll('input[type="radio"]').forEach((radio) => {
-          radio.addEventListener("change", () => {
-            card.querySelectorAll(".choice-label").forEach((lbl) => lbl.classList.remove("selected"));
-            radio.closest(".choice-label").classList.add("selected");
-          });
-        });
-
-        container.appendChild(card);
-      });
-    }
-
-    /** Evaluate answers */
-    function evaluate() {
-      let correct = 0;
-
-      questions.forEach((q) => {
-        const card = container.querySelector(`.question-card[data-id="${q.id}"]`);
-        const selected = card.querySelector(`input[name="q${q.id}"]:checked`);
-        const userAnswer = selected ? selected.value : null;
-        const isCorrect = userAnswer === q.answer;
-
-        if (isCorrect) {
-          correct++;
-          card.classList.add("correct");
-        } else {
-          card.classList.add("incorrect");
-          // Show explanation for wrong answers
-          const explanation = card.querySelector(".explanation");
-          if (explanation) explanation.classList.add("visible");
-        }
-
-        // Highlight correct / wrong choices
-        card.querySelectorAll(".choice-label").forEach((lbl) => {
-          const label = lbl.dataset.label;
-          if (label === q.answer) {
-            lbl.classList.add("correct-answer");
-          }
-          if (label === userAnswer && !isCorrect) {
-            lbl.classList.add("wrong-answer");
-          }
-        });
-
-        // Disable radios
-        card.querySelectorAll('input[type="radio"]').forEach((r) => (r.disabled = true));
+      // Last score badges on cards
+      document.querySelectorAll(".qcm-card").forEach((card) => {
+        const href = card.getAttribute("href");
+        if (!href) return;
+        const match = href.match(/qcm=(\S+)/);
+        if (!match) return;
+        const qcmId = match[1];
+        const old = card.querySelector(".qcm-score");
+        if (old) old.remove();
+        const last = history.filter((r) => String(r.qcm) === qcmId).pop();
+        if (!last) return;
+        const badge = document.createElement("span");
+        badge.className = "qcm-score";
+        if (last.percentage === 100) badge.classList.add("perfect");
+        else if (last.percentage >= 50) badge.classList.add("good");
+        else badge.classList.add("bad");
+        badge.textContent = `Dernier : ${last.score}/${last.total} (${last.percentage}%)`;
+        card.appendChild(badge);
       });
 
-      // Show score
-      const total = questions.length;
-      const pct = Math.round((correct / total) * 100);
-      scoreBanner.textContent = `Score : ${correct} / ${total} (${pct}%)`;
-      if (correct === total) {
-        scoreBanner.className = "score-banner visible perfect";
-      } else if (correct >= total / 2) {
-        scoreBanner.className = "score-banner visible good";
-      } else {
-        scoreBanner.className = "score-banner visible bad";
-      }
+      // Results table
+      const section = document.getElementById("historySection");
+      const tbody = document.getElementById("historyBody");
+      tbody.innerHTML = "";
 
-      submitBtn.style.display = "none";
-      resetBtn.style.display = "";
-      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
-    }
-
-    submitBtn.addEventListener("click", () => {
-      // Check all questions answered
-      const unanswered = questions.filter(
-        (q) => !container.querySelector(`input[name="q${q.id}"]:checked`)
-      );
-      if (unanswered.length > 0) {
-        alert(`Veuillez répondre à toutes les questions. (${unanswered.length} sans réponse)`);
+      if (history.length === 0) {
+        section.classList.remove("visible");
         return;
       }
-      evaluate();
-    });
 
-    resetBtn.addEventListener("click", render);
+      // Show most recent first
+      history.slice().reverse().forEach((r) => {
+        const d = new Date(r.date);
+        const dateStr = d.toLocaleDateString("fr-FR", {
+          day: "2-digit", month: "2-digit", year: "numeric",
+          hour: "2-digit", minute: "2-digit"
+        });
+        let cls = "bad";
+        if (r.percentage === 100) cls = "perfect";
+        else if (r.percentage >= 50) cls = "good";
 
-    // Initial render
-    render();
-  })();
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${dateStr}</td>
+          <td>QCM ${r.qcm}</td>
+          <td>${r.score} / ${r.total}</td>
+          <td><span class="score-pill ${cls}">${r.percentage}%</span></td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      section.classList.add("visible");
+    } catch (e) { /* localStorage unavailable */ }
+  }
+
+  document.getElementById("clearHistoryBtn").addEventListener("click", () => {
+    if (!confirm("Effacer tout l'historique des résultats ?")) return;
+    localStorage.removeItem("qcm_results");
+    loadResults();
+  });
+
+  loadResults();
 </script>
 
 </body>

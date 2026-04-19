@@ -1,0 +1,19 @@
+// Catégorie 5 – Statistiques
+// Sous-catégorie 5.1 – Lire et commenter des graphiques usuels
+const qcmCategory = "Statistiques";
+const qcmSubcategory = "Lire et commenter des graphiques usuels";
+const questions = [
+  {
+    id: 1,
+    text: "Le diagramme en barres ci-contre donne la production d'électricité en France, en TWh (térawatt-heure), selon son origine (source : INSEE). L'année où la production d'électricité d'origine hydraulique était la plus importante est :",
+    questionImage: '<svg width="360" height="280" viewBox="0 0 360 280"><rect width="360" height="280" fill="#fafafa" rx="6"/><text x="15" y="20" font-size="10" fill="#333" transform="rotate(-90,15,140)">Production d\'électricité en France (en TWh)</text><line x1="50" y1="250" x2="340" y2="250" stroke="#333" stroke-width="1"/><line x1="50" y1="250" x2="50" y2="20" stroke="#333" stroke-width="1"/><text x="40" y="254" font-size="9" fill="#666" text-anchor="end">0</text><text x="40" y="222" font-size="9" fill="#666" text-anchor="end">100</text><text x="40" y="190" font-size="9" fill="#666" text-anchor="end">200</text><text x="40" y="158" font-size="9" fill="#666" text-anchor="end">300</text><text x="40" y="126" font-size="9" fill="#666" text-anchor="end">400</text><text x="40" y="94" font-size="9" fill="#666" text-anchor="end">500</text><text x="40" y="62" font-size="9" fill="#666" text-anchor="end">600</text><text x="40" y="30" font-size="9" fill="#666" text-anchor="end">700</text><line x1="50" y1="222" x2="340" y2="222" stroke="#eee" stroke-width="0.5"/><line x1="50" y1="190" x2="340" y2="190" stroke="#eee" stroke-width="0.5"/><line x1="50" y1="158" x2="340" y2="158" stroke="#eee" stroke-width="0.5"/><line x1="50" y1="126" x2="340" y2="126" stroke="#eee" stroke-width="0.5"/><line x1="50" y1="94" x2="340" y2="94" stroke="#eee" stroke-width="0.5"/><line x1="50" y1="62" x2="340" y2="62" stroke="#eee" stroke-width="0.5"/><rect x="65" y="120" width="40" height="130" fill="#3498db"/><rect x="65" y="88" width="40" height="32" fill="#e67e22"/><rect x="65" y="68" width="40" height="20" fill="#2ecc71"/><rect x="125" y="100" width="40" height="150" fill="#3498db"/><rect x="125" y="68" width="40" height="32" fill="#e67e22"/><rect x="125" y="42" width="40" height="26" fill="#2ecc71"/><rect x="185" y="100" width="40" height="150" fill="#3498db"/><rect x="185" y="74" width="40" height="26" fill="#e67e22"/><rect x="185" y="56" width="40" height="18" fill="#2ecc71"/><rect x="245" y="108" width="40" height="142" fill="#3498db"/><rect x="245" y="82" width="40" height="26" fill="#e67e22"/><rect x="245" y="70" width="40" height="12" fill="#2ecc71"/><rect x="305" y="110" width="40" height="140" fill="#3498db"/><rect x="305" y="86" width="40" height="24" fill="#e67e22"/><rect x="305" y="74" width="40" height="12" fill="#2ecc71"/><text x="85" y="264" font-size="10" fill="#333" text-anchor="middle">1995</text><text x="145" y="264" font-size="10" fill="#333" text-anchor="middle">2001</text><text x="205" y="264" font-size="10" fill="#333" text-anchor="middle">2006</text><text x="265" y="264" font-size="10" fill="#333" text-anchor="middle">2011</text><text x="325" y="264" font-size="10" fill="#333" text-anchor="middle">2016</text><rect x="240" y="10" width="12" height="12" fill="#2ecc71"/><text x="256" y="20" font-size="10" fill="#333">Hydraulique</text><rect x="240" y="26" width="12" height="12" fill="#e67e22"/><text x="256" y="36" font-size="10" fill="#333">Thermique</text><rect x="240" y="42" width="12" height="12" fill="#3498db"/><text x="256" y="52" font-size="10" fill="#333">Nucléaire</text></svg>',
+    choices: [
+      { label: "A", text: "1995" },
+      { label: "B", text: "2001" },
+      { label: "C", text: "2011" },
+      { label: "D", text: "2016" }
+    ],
+    answer: "B",
+    explanation: "D'après le diagramme, la part hydraulique (barre du bas) est la plus grande en 2001."
+  }
+];

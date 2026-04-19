@@ -1,16 +1,3 @@
-/**
- * QCM Questions Data
- *
- * Each question object has:
- *   - id: unique identifier
- *   - text: the question text
- *   - choices: array of { label, text } objects
- *   - answer: the label of the correct choice (e.g. "A")
- *   - explanation: (optional) explanation shown on correction
- *
- * To add more questions, simply append to this array.
- * To create variations, duplicate a question and modify the values.
- */
 const questions = [
   {
     id: 1,
@@ -62,15 +49,15 @@ const questions = [
   },
   {
     id: 5,
-    text: "10<sup>30</sup> + 10<sup>−30</sup> est environ égal à :",
+    text: "\\(10^{30} + 10^{-30}\\) est environ égal à :",
     choices: [
-      { label: "A", text: "10<sup>0</sup>" },
+      { label: "A", text: "\\(10^{0}\\)" },
       { label: "B", text: "0" },
-      { label: "C", text: "10<sup>30</sup>" },
-      { label: "D", text: "20<sup>30</sup>" }
+      { label: "C", text: "\\(10^{30}\\)" },
+      { label: "D", text: "\\(20^{30}\\)" }
     ],
     answer: "C",
-    explanation: "10<sup>−30</sup> est un nombre extrêmement petit (quasi nul). Donc 10<sup>30</sup> + 10<sup>−30</sup> ≈ 10<sup>30</sup>."
+    explanation: "\\(10^{-30}\\) est un nombre extrêmement petit (quasi nul). Donc \\(10^{30} + 10^{-30} \\approx 10^{30}\\)."
   },
   {
     id: 6,
@@ -98,11 +85,11 @@ const questions = [
   },
   {
     id: 8,
-    text: "La solution de l'équation <sup>144</sup>⁄<sub><em>x</em></sub> = 9 est :",
+    text: "La solution de l'équation \\(\\frac{144}{x}\\) = 9 est :",
     choices: [
       { label: "A", text: "<em>x</em> = 144 × 9" },
-      { label: "B", text: "<em>x</em> = <sup>9</sup>⁄<sub>144</sub>" },
-      { label: "C", text: "<em>x</em> = <sup>144</sup>⁄<sub>9</sub>" },
+      { label: "B", text: "<em>x</em> = \\(\\frac{9}{144}\\)" },
+      { label: "C", text: "<em>x</em> = \\(\\frac{144}{9}\\)" },
       { label: "D", text: "<em>x</em> = −16" }
     ],
     answer: "C",
@@ -131,65 +118,5 @@ const questions = [
     ],
     answer: "B",
     explanation: "400 × (1 + 0,20) = 400 × 1,20 = 480 euros."
-  },
-  {
-    id: 11,
-    text: "Un sac coûte 130 euros. Le prix baisse de 10%. Le nouveau prix est :",
-    choices: [
-      { label: "A", text: "130 × 0,1" },
-      { label: "B", text: "130 × (−<sup>10</sup>⁄<sub>100</sub>)" },
-      { label: "C", text: "130 × (1 + <sup>10</sup>⁄<sub>100</sub>)" },
-      { label: "D", text: "130 × 0,9" }
-    ],
-    answer: "D",
-    explanation: "Une baisse de 10% revient à multiplier par (1 − 0,10) = 0,9. Donc le nouveau prix est 130 × 0,9 = 117 euros."
-  },
-  {
-    id: 12,
-    text: "Le prix d'un article est noté <em>P</em>. Il connaît deux augmentations de 20%. Le prix après ces augmentations est :",
-    choices: [
-      { label: "A", text: "<em>P</em> × (1 + (<sup>20</sup>⁄<sub>100</sub>))<sup>2</sup>" },
-      { label: "B", text: "<em>P</em> × 1,40" },
-      { label: "C", text: "<sup><em>P</em></sup>⁄<sub>1,44</sub>" },
-      { label: "D", text: "<em>P</em> × 1,2<sup>2</sup>" }
-    ],
-    answer: "D",
-    explanation: "Deux augmentations successives de 20% : P × 1,20 × 1,20 = P × 1,2² = P × 1,44."
-  },
-  {
-    id: 13,
-    text: "Lors d'une élection, le quart des électeurs a voté pour A, 20% a voté pour B, un tiers a voté pour C, et le reste a voté pour D. Le candidat ayant recueilli le <u>moins</u> de votes est :",
-    choices: [
-      { label: "A", text: "A" },
-      { label: "B", text: "B" },
-      { label: "C", text: "C" },
-      { label: "D", text: "D" }
-    ],
-    answer: "B",
-    explanation: "A = 1/4 = 25%, B = 20%, C = 1/3 ≈ 33,3%, D = 100% − 25% − 20% − 33,3% ≈ 21,7%. B a le moins de votes avec 20%."
-  },
-  {
-    id: 14,
-    text: "On considère <em>A</em> = <sup>2</sup>⁄<sub>1 − <sup>2</sup>⁄<sub>3</sub></sub>. On a :",
-    choices: [
-      { label: "A", text: "<em>A</em> = −1" },
-      { label: "B", text: "<em>A</em> = <sup>2</sup>⁄<sub>3</sub>" },
-      { label: "C", text: "<em>A</em> = 6" },
-      { label: "D", text: "<em>A</em> = 9" }
-    ],
-    answer: "C",
-    explanation: "A = 2 / (1 − 2/3) = 2 / (1/3) = 2 × 3 = 6."
-  },
-  {
-    id: 15,
-    text: "On considère <em>A</em> = <sup>1</sup>⁄<sub>100</sub> + <sup>1</sup>⁄<sub>1000</sub>. On a :",
-    choices: [
-      { label: "A", text: "<em>A</em> = 100,001" },
-      { label: "B", text: "<em>A</em> = <sup>2</sup>⁄<sub>100 000</sub>" },
-      { label: "C", text: "<em>A</em> = 0,11" },
-      { label: "D", text: "<em>A</em> = 0,011" }
-    ],
-    answer: "D",
-    explanation: "A = 1/100 + 1/1000 = 0,01 + 0,001 = 0,011."
   }
 ];
