@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QCM</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: #f0f2f5;
+      color: #1a1a2e;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.8rem;
+      color: #16213e;
+    }
+
+    /* ---------- Question card ---------- */
+    .question-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: border-left 0.3s;
+      border-left: 4px solid transparent;
+    }
+
+    .question-card.correct {
+      border-left-color: #27ae60;
+    }
+
+    .question-card.incorrect {
+      border-left-color: #e74c3c;
+    }
+
+    .question-number {
+      font-weight: 700;
+      color: #0f3460;
+      margin-bottom: 0.5rem;
+    }
+
+    .question-text {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    /* ---------- Choices ---------- */
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .choice-label {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.6rem 1rem;
+      border: 2px solid #dfe6e9;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      user-select: none;
+    }
+
+    .choice-label:hover {
+      background: #f1f2f6;
+    }
+
+    .choice-label input[type="radio"] {
+      accent-color: #0f3460;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .choice-label.selected {
+      background: #dfe6ed;
+      border-color: #0f3460;
+    }
+
+    /* After correction */
+    .choice-label.correct-answer {
+      background: #d4edda;
+      border-color: #27ae60;
+    }
+
+    .choice-label.wrong-answer {
+      background: #f8d7da;
+      border-color: #e74c3c;
+    }
+
+    /* Explanation */
+    .explanation {
+      display: none;
+      margin-top: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: #fef9e7;
+      border-left: 3px solid #f1c40f;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .explanation.visible {
+      display: block;
+    }
+
+    /* ---------- Buttons ---------- */
+    .btn-row {
+      text-align: center;
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    #submitBtn {
+      background: #0f3460;
+      color: #fff;
+    }
+
+    #submitBtn:hover {
+      background: #16213e;
+    }
+
+    #submitBtn:disabled {
+      background: #95a5a6;
+      cursor: not-allowed;
+    }
+
+    #resetBtn {
+      background: #e74c3c;
+      color: #fff;
+      display: none;
+    }
+
+    #resetBtn:hover {
+      background: #c0392b;
+    }
+
+    /* ---------- Score ---------- */
+    .score-banner {
+      display: none;
+      text-align: center;
+      padding: 1.25rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+
+    .score-banner.visible {
+      display: block;
+    }
+
+    .score-banner.perfect {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .score-banner.good {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .score-banner.bad {
+      background: #f8d7da;
+      color: #721c24;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>📝 QCM</h1>
+
+  <div id="scoreBanner" class="score-banner" role="status" aria-live="polite" aria-atomic="true"></div>
+  <div id="questionsContainer"></div>
+
+  <div class="btn-row">
+    <button id="submitBtn">Valider</button>
+    <button id="resetBtn">Recommencer</button>
+  </div>
+</div>
+
+<script src="questions.js"></script>
+<script>
+  (function () {
+    const container = document.getElementById("questionsContainer");
+    const submitBtn = document.getElementById("submitBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    const scoreBanner = document.getElementById("scoreBanner");
+
+    /** Render all questions */
+    function render() {
+      container.innerHTML = "";
+      scoreBanner.className = "score-banner";
+      scoreBanner.textContent = "";
+      submitBtn.style.display = "";
+      submitBtn.disabled = false;
+      resetBtn.style.display = "none";
+
+      questions.forEach((q, idx) => {
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.dataset.id = q.id;
+
+        const questionNumber = document.createElement("p");
+        questionNumber.className = "question-number";
+        questionNumber.textContent = `Question ${idx + 1}`;
+
+        const questionText = document.createElement("p");
+        questionText.className = "question-text";
+        questionText.textContent = q.text;
+
+        const choicesDiv = document.createElement("div");
+        choicesDiv.className = "choices";
+
+        q.choices.forEach((c) => {
+          const lbl = document.createElement("label");
+          lbl.className = "choice-label";
+          lbl.dataset.label = c.label;
+
+          const input = document.createElement("input");
+          input.type = "radio";
+          input.name = `q${q.id}`;
+          input.value = c.label;
+
+          const span = document.createElement("span");
+          const strong = document.createElement("strong");
+          strong.textContent = `${c.label}.`;
+          span.appendChild(strong);
+          span.appendChild(document.createTextNode(` ${c.text}`));
+
+          lbl.appendChild(input);
+          lbl.appendChild(span);
+          choicesDiv.appendChild(lbl);
+        });
+
+        card.appendChild(questionNumber);
+        card.appendChild(questionText);
+        card.appendChild(choicesDiv);
+
+        if (q.explanation) {
+          const explanation = document.createElement("div");
+          explanation.className = "explanation";
+          explanation.textContent = q.explanation;
+          card.appendChild(explanation);
+        }
+
+        // Highlight selected choice
+        card.querySelectorAll('input[type="radio"]').forEach((radio) => {
+          radio.addEventListener("change", () => {
+            card.querySelectorAll(".choice-label").forEach((lbl) => lbl.classList.remove("selected"));
+            radio.closest(".choice-label").classList.add("selected");
+          });
+        });
+
+        container.appendChild(card);
+      });
+    }
+
+    /** Evaluate answers */
+    function evaluate() {
+      let correct = 0;
+
+      questions.forEach((q) => {
+        const card = container.querySelector(`.question-card[data-id="${q.id}"]`);
+        const selected = card.querySelector(`input[name="q${q.id}"]:checked`);
+        const userAnswer = selected ? selected.value : null;
+        const isCorrect = userAnswer === q.answer;
+
+        if (isCorrect) {
+          correct++;
+          card.classList.add("correct");
+        } else {
+          card.classList.add("incorrect");
+          // Show explanation for wrong answers
+          const explanation = card.querySelector(".explanation");
+          if (explanation) explanation.classList.add("visible");
+        }
+
+        // Highlight correct / wrong choices
+        card.querySelectorAll(".choice-label").forEach((lbl) => {
+          const label = lbl.dataset.label;
+          if (label === q.answer) {
+            lbl.classList.add("correct-answer");
+          }
+          if (label === userAnswer && !isCorrect) {
+            lbl.classList.add("wrong-answer");
+          }
+        });
+
+        // Disable radios
+        card.querySelectorAll('input[type="radio"]').forEach((r) => (r.disabled = true));
+      });
+
+      // Show score
+      const total = questions.length;
+      const pct = Math.round((correct / total) * 100);
+      scoreBanner.textContent = `Score : ${correct} / ${total} (${pct}%)`;
+      if (correct === total) {
+        scoreBanner.className = "score-banner visible perfect";
+      } else if (correct >= total / 2) {
+        scoreBanner.className = "score-banner visible good";
+      } else {
+        scoreBanner.className = "score-banner visible bad";
+      }
+
+      submitBtn.style.display = "none";
+      resetBtn.style.display = "";
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+    }
+
+    submitBtn.addEventListener("click", () => {
+      // Check all questions answered
+      const unanswered = questions.filter(
+        (q) => !container.querySelector(`input[name="q${q.id}"]:checked`)
+      );
+      if (unanswered.length > 0) {
+        alert(`Veuillez répondre à toutes les questions. (${unanswered.length} sans réponse)`);
+        return;
+      }
+      evaluate();
+    });
+
+    resetBtn.addEventListener("click", render);
+
+    // Initial render
+    render();
+  })();
+</script>
+
+</body>
+</html>
