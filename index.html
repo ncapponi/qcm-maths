@@ -96,6 +96,41 @@
       border-color: #0f3460;
     }
 
+    /* Image / SVG choices */
+    .choice-label.has-image {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .choice-label.has-image .choice-image {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .choice-label.has-image .choice-image svg {
+      max-width: 200px;
+    }
+
+    /* Inline tables in question text */
+    .qcm-table {
+      border-collapse: collapse;
+      margin: 0.5rem 0;
+    }
+
+    .qcm-table th,
+    .qcm-table td {
+      border: 1px solid #555;
+      padding: 0.4rem 1rem;
+      text-align: center;
+    }
+
+    .qcm-table th {
+      background: #eee;
+      font-weight: 600;
+    }
+
     /* After correction */
     .choice-label.correct-answer {
       background: #d4edda;
@@ -238,48 +273,23 @@
         card.className = "question-card";
         card.dataset.id = q.id;
 
-        const questionNumber = document.createElement("p");
-        questionNumber.className = "question-number";
-        questionNumber.textContent = `Question ${idx + 1}`;
-
-        const questionText = document.createElement("p");
-        questionText.className = "question-text";
-        questionText.textContent = q.text;
-
-        const choicesDiv = document.createElement("div");
-        choicesDiv.className = "choices";
-
-        q.choices.forEach((c) => {
-          const lbl = document.createElement("label");
-          lbl.className = "choice-label";
-          lbl.dataset.label = c.label;
-
-          const input = document.createElement("input");
-          input.type = "radio";
-          input.name = `q${q.id}`;
-          input.value = c.label;
-
-          const span = document.createElement("span");
-          const strong = document.createElement("strong");
-          strong.textContent = `${c.label}.`;
-          span.appendChild(strong);
-          span.appendChild(document.createTextNode(` ${c.text}`));
-
-          lbl.appendChild(input);
-          lbl.appendChild(span);
-          choicesDiv.appendChild(lbl);
-        });
-
-        card.appendChild(questionNumber);
-        card.appendChild(questionText);
-        card.appendChild(choicesDiv);
-
-        if (q.explanation) {
-          const explanation = document.createElement("div");
-          explanation.className = "explanation";
-          explanation.textContent = q.explanation;
-          card.appendChild(explanation);
-        }
+        card.innerHTML = `
+          <p class="question-number">Question ${idx + 1}</p>
+          <div class="question-text">${q.text}</div>
+          <div class="choices">
+            ${q.choices
+              .map(
+                (c) => `
+              <label class="choice-label${c.image ? ' has-image' : ''}" data-label="${c.label}">
+                <input type="radio" name="q${q.id}" value="${c.label}">
+                <span><strong>${c.label}.</strong> ${c.text}</span>
+                ${c.image ? '<div class="choice-image">' + c.image + '</div>' : ''}
+              </label>`
+              )
+              .join("")}
+          </div>
+          <div class="explanation">${q.explanation || ""}</div>
+        `;
 
         // Highlight selected choice
         card.querySelectorAll('input[type="radio"]').forEach((radio) => {
