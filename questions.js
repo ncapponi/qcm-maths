@@ -75,7 +75,6 @@ const questions = [
   {
     id: 6,
     text: "La seule droite pouvant correspondre à l'équation <em>y</em> = −2<em>x</em> + 5 est :",
-    image: true,
     choices: [
       { label: "A", text: "la droite D<sub>1</sub>", image: '<svg width="200" height="200" viewBox="0 0 200 200"><line x1="10" y1="100" x2="190" y2="100" stroke="#333" stroke-width="1.5"/><polygon points="190,100 184,96 184,104" fill="#333"/><line x1="100" y1="190" x2="100" y2="10" stroke="#333" stroke-width="1.5"/><polygon points="100,10 96,16 104,16" fill="#333"/><line x1="20" y1="190" x2="180" y2="78" stroke="#0f3460" stroke-width="2.5"/></svg>' },
       { label: "B", text: "la droite D<sub>2</sub>", image: '<svg width="200" height="200" viewBox="0 0 200 200"><line x1="10" y1="100" x2="190" y2="100" stroke="#333" stroke-width="1.5"/><polygon points="190,100 184,96 184,104" fill="#333"/><line x1="100" y1="190" x2="100" y2="10" stroke="#333" stroke-width="1.5"/><polygon points="100,10 96,16 104,16" fill="#333"/><line x1="77" y1="4" x2="165" y2="180" stroke="#0f3460" stroke-width="2.5"/></svg>' },
