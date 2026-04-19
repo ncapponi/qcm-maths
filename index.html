@@ -207,7 +207,7 @@
 <div class="container">
   <h1>📝 QCM</h1>
 
-  <div id="scoreBanner" class="score-banner"></div>
+  <div id="scoreBanner" class="score-banner" role="status" aria-live="polite" aria-atomic="true"></div>
   <div id="questionsContainer"></div>
 
   <div class="btn-row">
@@ -238,22 +238,48 @@
         card.className = "question-card";
         card.dataset.id = q.id;
 
-        card.innerHTML = `
-          <p class="question-number">Question ${idx + 1}</p>
-          <p class="question-text">${q.text}</p>
-          <div class="choices">
-            ${q.choices
-              .map(
-                (c) => `
-              <label class="choice-label" data-label="${c.label}">
-                <input type="radio" name="q${q.id}" value="${c.label}">
-                <span><strong>${c.label}.</strong> ${c.text}</span>
-              </label>`
-              )
-              .join("")}
-          </div>
-          <div class="explanation">${q.explanation || ""}</div>
-        `;
+        const questionNumber = document.createElement("p");
+        questionNumber.className = "question-number";
+        questionNumber.textContent = `Question ${idx + 1}`;
+
+        const questionText = document.createElement("p");
+        questionText.className = "question-text";
+        questionText.textContent = q.text;
+
+        const choicesDiv = document.createElement("div");
+        choicesDiv.className = "choices";
+
+        q.choices.forEach((c) => {
+          const lbl = document.createElement("label");
+          lbl.className = "choice-label";
+          lbl.dataset.label = c.label;
+
+          const input = document.createElement("input");
+          input.type = "radio";
+          input.name = `q${q.id}`;
+          input.value = c.label;
+
+          const span = document.createElement("span");
+          const strong = document.createElement("strong");
+          strong.textContent = `${c.label}.`;
+          span.appendChild(strong);
+          span.appendChild(document.createTextNode(` ${c.text}`));
+
+          lbl.appendChild(input);
+          lbl.appendChild(span);
+          choicesDiv.appendChild(lbl);
+        });
+
+        card.appendChild(questionNumber);
+        card.appendChild(questionText);
+        card.appendChild(choicesDiv);
+
+        if (q.explanation) {
+          const explanation = document.createElement("div");
+          explanation.className = "explanation";
+          explanation.textContent = q.explanation;
+          card.appendChild(explanation);
+        }
 
         // Highlight selected choice
         card.querySelectorAll('input[type="radio"]').forEach((radio) => {
@@ -316,7 +342,8 @@
 
       submitBtn.style.display = "none";
       resetBtn.style.display = "";
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
     }
 
     submitBtn.addEventListener("click", () => {
