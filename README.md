@@ -37,3 +37,19 @@ Edit **`questions.js`**. Each question is an object in the `questions` array:
 ```
 
 To create variations, duplicate an existing question, change its `id`, and tweak the values.
+
+## Catégories à tester
+* calcul numérique et algébrique
+ * comparaison de nombres (avec fractions, racine carrées, ...)
+ * opérations et comparaisons entre fractions simples
+ * opérations sur les puissances
+ * passage d'une écriture d'un nombre à un autre (décimale, fractionnaire, pourcentage)
+ * estimer un ordre de grandeur
+ * effectuer des conversions d'unités (longueurs, aires, volumes, contenances, durées, vitesses, masses)
+ * calcul littéral élémentaire
+   * expressions additives: -(a+b)=-a-b, -(a-b)=b-a
+   * expressions mutiplicatives: 
+      * x=1*x,x=x/1,(-1)*a=a/(-1)=-a
+      * 0=0*x,0/a=0,x/a=(1/a)*x,ab/c=a*(b/c)=(a/c)*b
+      * 1/(1/a)=a,1/(a/b)=b/a,(a/b)/(c/d)=a/b*d/c=ad/(bc)
+ * développer, factoriser, réduire une expression algébrique simple 
