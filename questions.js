@@ -111,7 +111,7 @@ const questions = [
   },
   {
     id: 9,
-    text: 'Voici les notes sur vingt obtenues par un élève en mathématiques :<br><br><table class="qcm-table"><tr><th>Note</th><td>10</td><td>13</td><td>12</td><td><em>x</em></td></tr><tr><th>Coefficient</th><td>1</td><td>1</td><td>1</td><td>2</td></tr></table><br>On cherche ce que doit valoir <em>x</em> pour que la moyenne de l\'élève soit égale à 15.',
+    text: "Voici les notes sur vingt obtenues par un élève en mathématiques :<br><br><table class='qcm-table'><tr><th>Note</th><td>10</td><td>13</td><td>12</td><td><em>x</em></td></tr><tr><th>Coefficient</th><td>1</td><td>1</td><td>1</td><td>2</td></tr></table><br>On cherche ce que doit valoir <em>x</em> pour que la moyenne de l'élève soit égale à 15.",
     choices: [
       { label: "A", text: "<em>x</em> = 20" },
       { label: "B", text: "<em>x</em> = 18" },
