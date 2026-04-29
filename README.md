@@ -1,10 +1,12 @@
-# QCM
+# QCM Maths 1ère
 
-A simple HTML/JavaScript quiz (QCM — Questionnaire à Choix Multiples) for students.
+Un QCM sur les maths de 1ère, basé sur le programme officiel 2026 sur les automatismes. 
 
-## Usage
+## Utilisation
 
-Open `index.html` in any browser — no server needed.
+* Télecharger qcm.zip
+* unzip qcm.zip
+* Ouvrir `index.html` dans n'importe quel navigateur — aucun serveur nécessaire.
 
 ```bash
 # macOS
@@ -17,26 +19,26 @@ xdg-open index.html
 start index.html
 ```
 
-## Adding / modifying questions
+## Ajouter / modifier des questions
 
-Edit **`questions.js`**. Each question is an object in the `questions` array:
+Modifier **`questions.js`**. Chaque question est un objet dans le tableau `questions` :
 
 ```js
 {
-  id: 4,                           // unique id
-  text: "Your question here?",     // question text
+  id: 4,                           // identifiant unique
+  text: "Votre question ici ?",    // texte de la question
   choices: [
-    { label: "A", text: "First option" },
-    { label: "B", text: "Second option" },
-    { label: "C", text: "Third option" },
-    { label: "D", text: "Fourth option" }
+    { label: "A", text: "Première option" },
+    { label: "B", text: "Deuxième option" },
+    { label: "C", text: "Troisième option" },
+    { label: "D", text: "Quatrième option" }
   ],
-  answer: "B",                     // correct choice label
-  explanation: "Why B is correct." // shown when the user gets it wrong
+  answer: "B",                     // label de la bonne réponse
+  explanation: "Pourquoi B est correct." // affiché en cas de mauvaise réponse
 }
 ```
 
-To create variations, duplicate an existing question, change its `id`, and tweak the values.
+Pour créer des variantes, dupliquer une question existante, changer son `id` et modifier les valeurs.
 
 ## Catégories à tester
 * calcul numérique et algébrique
