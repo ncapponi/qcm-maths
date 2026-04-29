@@ -55,9 +55,9 @@ const questions = [
     id: 5,
     text: "On considère <em>A</em> = \\(\\frac{3}{5}\\) × \\(\\frac{10}{9}\\). On a :",
     choices: [
-      { label: "A", text: "<em>A</em> = \\(\\frac{30}{45}\\)" },
+      { label: "A", text: "<em>A</em> = \\(\\frac{13}{14}\\)" },
       { label: "B", text: "<em>A</em> = \\(\\frac{2}{3}\\)" },
-      { label: "C", text: "<em>A</em> = \\(\\frac{13}{14}\\)" },
+      { label: "C", text: "<em>A</em> = \\(\\frac{5}{6}\\)" },
       { label: "D", text: "<em>A</em> = \\(\\frac{1}{3}\\)" }
     ],
     answer: "B",
@@ -65,15 +65,15 @@ const questions = [
   },
   {
     id: 6,
-    text: "On considère <em>A</em> = \\(\\frac{7}{3}\\) ÷ \\(\\frac{14}{9}\\). On a :",
+    text: "On considère <em>A</em> = \\(\\frac{2}{3}\\) ÷ \\(\\frac{4}{9}\\). On a :",
     choices: [
       { label: "A", text: "<em>A</em> = \\(\\frac{3}{2}\\)" },
-      { label: "B", text: "<em>A</em> = \\(\\frac{98}{27}\\)" },
+      { label: "B", text: "<em>A</em> = \\(\\frac{8}{27}\\)" },
       { label: "C", text: "<em>A</em> = \\(\\frac{2}{3}\\)" },
       { label: "D", text: "<em>A</em> = \\(\\frac{7}{6}\\)" }
     ],
     answer: "A",
-    explanation: "\\(\\frac{7}{3} \\div \\frac{14}{9} = \\frac{7}{3} \\times \\frac{9}{14} = \\frac{63}{42} = \\frac{3}{2}\\)."
+    explanation: "\\(\\frac{2}{3} \\div \\frac{4}{9} = \\frac{2}{3} \\times \\frac{9}{4} = \\frac{18}{12} = \\frac{3}{2}\\)."
   },
   {
     id: 7,
