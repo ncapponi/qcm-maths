@@ -15,5 +15,114 @@ const questions = [
     ],
     answer: "B",
     explanation: "D'après le diagramme, la part hydraulique (barre du bas) est la plus grande en 2001."
+  },
+  {
+    id: 2,
+    text: "Un diagramme circulaire représente la répartition des élèves d'un lycée selon la filière. Le secteur « filière technologique » a un angle de 90°. La proportion d'élèves en filière technologique est :",
+    choices: [
+      { label: "A", text: "10 %" },
+      { label: "B", text: "25 %" },
+      { label: "C", text: "50 %" },
+      { label: "D", text: "90 %" }
+    ],
+    answer: "B",
+    explanation: "\\(\\frac{90}{360} = \\frac{1}{4} = 25\\%\\)."
+  },
+  {
+    id: 3,
+    text: "Sur le diagramme en barres ci-dessous, quelle catégorie a l'effectif le plus élevé ?",
+    questionImage: '<svg width="300" height="200" viewBox="0 0 300 200"><line x1="40" y1="170" x2="280" y2="170" stroke="#333" stroke-width="1.5"/><line x1="40" y1="170" x2="40" y2="20" stroke="#333" stroke-width="1.5"/><text x="30" y="174" font-size="9" fill="#666" text-anchor="end">0</text><text x="30" y="140" font-size="9" fill="#666" text-anchor="end">10</text><text x="30" y="105" font-size="9" fill="#666" text-anchor="end">20</text><text x="30" y="70" font-size="9" fill="#666" text-anchor="end">30</text><text x="30" y="35" font-size="9" fill="#666" text-anchor="end">40</text><rect x="55" y="105" width="35" height="65" fill="#3498db"/><rect x="110" y="70" width="35" height="100" fill="#e67e22"/><rect x="165" y="40" width="35" height="130" fill="#2ecc71"/><rect x="220" y="120" width="35" height="50" fill="#9b59b6"/><text x="72" y="185" font-size="10" fill="#333" text-anchor="middle">A</text><text x="127" y="185" font-size="10" fill="#333" text-anchor="middle">B</text><text x="182" y="185" font-size="10" fill="#333" text-anchor="middle">C</text><text x="237" y="185" font-size="10" fill="#333" text-anchor="middle">D</text></svg>',
+    choices: [
+      { label: "A", text: "A (environ 20)" },
+      { label: "B", text: "B (environ 30)" },
+      { label: "C", text: "C (environ 40)" },
+      { label: "D", text: "D (environ 15)" }
+    ],
+    answer: "C",
+    explanation: "La barre C est la plus haute, correspondant à un effectif d'environ 40."
+  },
+  {
+    id: 4,
+    text: "Un diagramme circulaire montre qu'un secteur représentant 180° correspond à la catégorie « sport ». Quelle fraction des personnes interrogées cela représente-t-il ?",
+    choices: [
+      { label: "A", text: "\\(\\frac{1}{4}\\)" },
+      { label: "B", text: "\\(\\frac{1}{3}\\)" },
+      { label: "C", text: "\\(\\frac{1}{2}\\)" },
+      { label: "D", text: "\\(\\frac{3}{4}\\)" }
+    ],
+    answer: "C",
+    explanation: "\\(\\frac{180}{360} = \\frac{1}{2}\\). La moitié des personnes interrogées a choisi « sport »."
+  },
+  {
+    id: 5,
+    text: "Sur un graphique de courbe montrant l'évolution de la température d'une ville sur une journée, on lit : 8 °C à 6 h, 15 °C à 12 h, 18 °C à 15 h et 10 °C à 21 h. La température maximale relevée est :",
+    choices: [
+      { label: "A", text: "8 °C" },
+      { label: "B", text: "15 °C" },
+      { label: "C", text: "18 °C" },
+      { label: "D", text: "21 °C" }
+    ],
+    answer: "C",
+    explanation: "Parmi les valeurs lues (8, 15, 18, 10), la température maximale est 18 °C à 15 h."
+  },
+  {
+    id: 6,
+    text: "Un diagramme en barres empilées montre que l'effectif total en 2020 est de 500 dont 200 filles et 300 garçons. La proportion de filles est :",
+    choices: [
+      { label: "A", text: "20 %" },
+      { label: "B", text: "40 %" },
+      { label: "C", text: "60 %" },
+      { label: "D", text: "200 %" }
+    ],
+    answer: "B",
+    explanation: "\\(\\frac{200}{500} = 0{,}40 = 40\\%\\)."
+  },
+  {
+    id: 7,
+    text: "Sur un diagramme circulaire, un secteur a un angle de 120°. L'effectif total est de 900. L'effectif de ce secteur est :",
+    choices: [
+      { label: "A", text: "120" },
+      { label: "B", text: "200" },
+      { label: "C", text: "300" },
+      { label: "D", text: "450" }
+    ],
+    answer: "C",
+    explanation: "\\(\\frac{120}{360} \\times 900 = \\frac{1}{3} \\times 900 = 300\\)."
+  },
+  {
+    id: 8,
+    text: "Un nuage de points montre la relation entre la taille et le poids d'élèves. Les points semblent alignés du bas à gauche vers le haut à droite. On peut dire que :",
+    choices: [
+      { label: "A", text: "il n'y a aucun lien entre taille et poids" },
+      { label: "B", text: "plus la taille augmente, plus le poids tend à augmenter" },
+      { label: "C", text: "plus la taille augmente, plus le poids diminue" },
+      { label: "D", text: "tous les élèves pèsent le même poids" }
+    ],
+    answer: "B",
+    explanation: "Des points alignés du bas-gauche au haut-droite indiquent une corrélation positive : quand la taille augmente, le poids tend à augmenter."
+  },
+  {
+    id: 9,
+    text: "Un diagramme semi-circulaire représente la répartition de 600 élèves. Un secteur de 60° correspond à :",
+    choices: [
+      { label: "A", text: "60 élèves" },
+      { label: "B", text: "100 élèves" },
+      { label: "C", text: "200 élèves" },
+      { label: "D", text: "300 élèves" }
+    ],
+    answer: "C",
+    explanation: "Dans un diagramme semi-circulaire, le total correspond à 180°. \\(\\frac{60}{180} \\times 600 = \\frac{1}{3} \\times 600 = 200\\)."
+  },
+  {
+    id: 10,
+    text: "Sur un graphique de courbe, la production d'une usine est de 1 000 unités en janvier et de 1 500 unités en juin. L'augmentation en pourcentage est :",
+    choices: [
+      { label: "A", text: "33 %" },
+      { label: "B", text: "50 %" },
+      { label: "C", text: "150 %" },
+      { label: "D", text: "500 %" }
+    ],
+    answer: "B",
+    explanation: "\\(\\frac{1\\,500 - 1\\,000}{1\\,000} = \\frac{500}{1\\,000} = 0{,}50 = 50\\%\\)."
   }
 ];

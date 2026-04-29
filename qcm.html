@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css">
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
   <style>
     * {
       box-sizing: border-box;
@@ -109,6 +110,13 @@
     .question-image svg {
       max-width: 100%;
       height: auto;
+    }
+
+    /* Question-level Plotly plot */
+    .question-plot {
+      display: flex;
+      justify-content: center;
+      margin: 0.75rem 0;
     }
 
     /* Image / SVG choices */
@@ -346,6 +354,7 @@
             <p class="question-number">Question ${idx + 1}</p>
             <p class="question-text">${q.text}</p>
             ${q.questionImage ? '<div class="question-image">' + q.questionImage + '</div>' : ''}
+            ${q.plotly ? '<div id="plot-' + q.id + '" class="question-plot"></div>' : ''}
             <div class="choices">
               ${q.choices
                 .map(
@@ -378,6 +387,22 @@
               { left: "$$", right: "$$", display: true },
               { left: "\\(", right: "\\)", display: false }
             ]
+          });
+        }
+
+        // Render Plotly plots if any question provides one
+        if (typeof Plotly !== "undefined") {
+          questions.forEach((q) => {
+            if (q.plotly) {
+              const el = document.getElementById(`plot-${q.id}`);
+              if (el) {
+                Plotly.newPlot(el, q.plotly.data, q.plotly.layout || {}, {
+                  displayModeBar: false,
+                  staticPlot: true,
+                  responsive: true
+                });
+              }
+            }
           });
         }
       }

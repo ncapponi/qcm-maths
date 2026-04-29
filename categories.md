@@ -157,6 +157,16 @@ Différencier la probabilité de l'intersection, la probabilité conditionnelle 
 
 ---
 
+## Catégorie 7 – Trigonométrie
+
+### 7.1 – Cercle trigonométrique : valeurs remarquables
+Reconnaître sur le cercle trigonométrique les angles remarquables 0, π/6, π/4, π/3 et π/2 et lire les valeurs de cos et sin associées (coordonnées du point image).
+
+### 7.2 – Variations et représentations graphiques
+Parité des fonctions cosinus (paire : cos(−x) = cos x) et sinus (impaire : sin(−x) = −sin x). Tableau de variations de cos sur [0, π] (décroissante de 1 à −1) et de sin sur [0, π] (croissante de 0 à 1 sur [0, π/2] puis décroissante de 1 à 0 sur [π/2, π]). Reconnaître et interpréter les représentations graphiques de y = cos x et y = sin x.
+
+---
+
 ## Fichiers de questions
 
 | Fichier | Catégorie | Sous-catégorie | Questions |
@@ -179,3 +189,12 @@ Différencier la probabilité de l'intersection, la probabilité conditionnelle 
 | `questions-3-5.js` | 3 – Évolutions et variations | 3.5 – Taux d'évolution réciproque | 1 |
 | `questions-4-6.js` | 4 – Fonctions et représentations | 4.6 – Droite et équation réduite | 1 |
 | `questions-5-1.js` | 5 – Statistiques | 5.1 – Lire des graphiques usuels | 1 |
+| `questions-4-6.js` | 4 – Fonctions et représentations | 4.6 – Droite et équation réduite | 1 |
+| `questions-6-1.js` | 6 – Probabilités | 6.1 – Une probabilité est entre 0 et 1 | 10 |
+| `questions-6-2.js` | 6 – Probabilités | 6.2 – Probabilité de l'événement contraire | 10 |
+| `questions-6-3.js` | 6 – Probabilités | 6.3 – Probabilité comme somme d'issues | 10 |
+| `questions-6-4.js` | 6 – Probabilités | 6.4 – Formule en équiprobabilité | 10 |
+| `questions-6-5.js` | 6 – Probabilités | 6.5 – Probabilités conditionnelles | 10 |
+| `questions-6-6.js` | 6 – Probabilités | 6.6 – Distinguer P(A∩B), P_A(B) et P_B(A) | 10 |
+| `questions-7-1.js` | 7 – Trigonométrie | 7.1 – Cercle trigonométrique : valeurs remarquables | 30 |
+| `questions-7-2.js` | 7 – Trigonométrie | 7.2 – Variations et représentations graphiques | 10 |
