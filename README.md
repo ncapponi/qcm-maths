@@ -19,6 +19,16 @@ xdg-open index.html
 start index.html
 ```
 
+## Publication sur GitHub Pages
+
+Le dépôt inclut un workflow GitHub Actions (`.github/workflows/deploy-pages.yml`) qui publie automatiquement le site à chaque push sur `main`.
+
+1. Aller dans **Settings → Pages** du dépôt.
+2. Dans **Build and deployment**, choisir **Source: GitHub Actions**.
+3. Pousser sur `main` (ou lancer le workflow manuellement).
+
+Le site sera disponible sur : `https://ncapponi.github.io/qcm-maths/`.
+
 ## Ajouter / modifier des questions
 
 Modifier **`questions.js`**. Chaque question est un objet dans le tableau `questions` :
